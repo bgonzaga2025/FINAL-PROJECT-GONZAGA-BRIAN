@@ -127,9 +127,25 @@ summary(model)
 #Make prediction
 predicted_prob <- predict(model,test_data,type = "response")
 
-#convert proberlilities
+#convert probabilities
 
-predicted_result <- ifelse(predicted_prob >=0.5,1,0)
+predicted_results <- ifelse(predicted_prob >=0.5,1,0)
+
+#Model accuracy 
+table(
+  actual = test_data$Result_Num,
+  Predicted = predicted_results
+)
+#calculate accuracy 
+accuracy <- mean(predicted_results ==test_data$Result_Num)
+
+#confirmation
+accuracy
+
+#Visualize the prediction
+ggplot(test_data,aes(x = Attendance,fill = factor(predicted_results))) +
+  geom_histogram(binwidth = 5,position = "dodge") +
+  labs(title = "predicted Pass/Fail by Attendance",fill ="Prediction")
 
 
 
