@@ -124,7 +124,6 @@ model <-glm(
   family = "binomial"
   )
 summary(model)
-hhhhhh
 #Make prediction
 predicted_prob <- predict(model,test_data,type = "response")
 
